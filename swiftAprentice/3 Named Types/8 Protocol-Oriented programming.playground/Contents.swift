@@ -175,5 +175,32 @@ protocol Item {
     var name: String { get }
     var clearance: Bool { get }
     var msrp: Float { get }
-    func totalPrive() -> Float
+    func totalPrice() -> Float
+}
+protocol Discountable {
+    var discount: Float { get }
+}
+protocol Taxable {
+    var saleTax: Float { get }
+}
+extension Taxable {
+    var saleTax: Float {
+        return 7.5
+    }
+}
+extension Item {
+    var clearance: Bool {
+        return false
+    }
+}
+extension Item where Self: Taxable {
+    func totalPrice() -> Float {
+        let tax = msrp * saleTax
+        return msrp + tax
+    }
+}
+extension Item where Self: Discountable {
+    func totalPrice() -> Float {
+        return 0.0
+    }
 }
