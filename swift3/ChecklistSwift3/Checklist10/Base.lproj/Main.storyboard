@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Checklist-->
+        <!--Pendientes-->
         <scene sceneID="OIc-w8-SsJ">
             <objects>
                 <tableViewController id="M9h-lH-M07" customClass="ChecklistTableViewController" customModule="Checklist10" customModuleProvider="target" sceneMemberID="viewController">
@@ -54,7 +54,7 @@
                             <outlet property="delegate" destination="M9h-lH-M07" id="hjp-bu-0ze"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Checklist" id="4aZ-Tr-S28">
+                    <navigationItem key="navigationItem" title="Pendientes" id="4aZ-Tr-S28">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ypk-7G-e7E">
                             <connections>
                                 <segue destination="4cL-hG-pDA" kind="presentation" identifier="AddItem" id="1nZ-2d-kN9"/>
@@ -66,7 +66,7 @@
             </objects>
             <point key="canvasLocation" x="1764" y="78.710644677661179"/>
         </scene>
-        <!--Add Item-->
+        <!--Agregar Actividad-->
         <scene sceneID="ex3-zB-hSF">
             <objects>
                 <tableViewController id="vpN-ch-hKO" customClass="ItemDetailViewController" customModule="Checklist10" customModuleProvider="target" sceneMemberID="viewController">
@@ -77,14 +77,14 @@
                         <sections>
                             <tableViewSection id="ayn-ms-3Mn">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ZXW-pc-c0E">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="ZXW-pc-c0E">
                                         <rect key="frame" x="0.0" y="99" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZXW-pc-c0E" id="VIR-Lq-qB7">
                                             <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Agrega una tarea" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5O1-BU-MO3">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Agrega una actividad" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5O1-BU-MO3">
                                                     <frame key="frameInset" minX="8" minY="6" width="359" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <nil key="textColor"/>
@@ -106,7 +106,7 @@
                             <outlet property="delegate" destination="vpN-ch-hKO" id="kBX-0R-LV7"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Add Item" id="nJ7-IN-xLm">
+                    <navigationItem key="navigationItem" title="Agregar Actividad" id="nJ7-IN-xLm">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cpg-s6-7yJ">
                             <connections>
                                 <action selector="cancel" destination="vpN-ch-hKO" id="5Xb-Df-sXc"/>

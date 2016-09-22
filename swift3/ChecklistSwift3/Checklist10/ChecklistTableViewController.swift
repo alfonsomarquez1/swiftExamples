@@ -14,24 +14,22 @@ class ChecklistTableViewController: UITableViewController {
     
     // MARK: - UIViewController
     required init?(coder aDecoder: NSCoder) {
-        tasks = []
-        tasks.append(CheckItem("Enviar mi CV a Nearsoft"))
-        tasks.append(CheckItem("Correr media hora diaria"))
-        tasks.append(CheckItem("Generar POC de Allianz"))
-        tasks.append(CheckItem("Ejercitar de Autosugestion"))
-        tasks.append(CheckItem("Generar material de Swift3"))
+        tasks = [CheckItem]()
+//        tasks.append(CheckItem("Enviar mi CV a Nearsoft"))
+//        tasks.append(CheckItem("Correr media hora diaria"))
+//        tasks.append(CheckItem("Generar POC de Allianz"))
+//        tasks.append(CheckItem("Ejercitar de Autosugestion"))
+//        tasks.append(CheckItem("Generar material de Swift3"))
         super.init(coder: aDecoder)
+        loadChecklistItems()
     }
-    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        print("path \( dataFilePath())")
+        print("path end")
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,6 +81,7 @@ class ChecklistTableViewController: UITableViewController {
         let item = tasks[indexPath.row]
         item.toggleCheck()
         updateCheck( withCell: cell , andCheckItem: item)
+        saveChecklistItems()
     }
 
     
@@ -100,6 +99,7 @@ class ChecklistTableViewController: UITableViewController {
         if editingStyle == .delete {
             tasks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            saveChecklistItems()
         }    
     }
     
@@ -149,6 +149,7 @@ extension ChecklistTableViewController: ItemDetailViewControllerDelegate {
         tasks.append(item)
         tableView.insertRows(at: [IndexPath(row: newRowCount, section: 0)], with: .automatic)
         dismiss(animated: true, completion: nil)
+        saveChecklistItems()
     }
     
     func itemDetail(controller: ItemDetailViewController, didFinishEditingItem item: CheckItem) {
@@ -160,6 +161,7 @@ extension ChecklistTableViewController: ItemDetailViewControllerDelegate {
             }
         }
         dismiss(animated: true, completion: nil)
+        saveChecklistItems()
     }
 }
 
@@ -170,7 +172,35 @@ extension ChecklistTableViewController {
         return paths[0]
     }
     func dataFilePath() -> String {
-        return (documentsDirectory() as NSString).strings(byAppendingPaths: ["Checklist.plist"])[0]
+//      "\(documentsDirectory())/Checklist10.plist"
+        return (documentsDirectory() as NSString).strings(byAppendingPaths: ["Checklist10.plist"])[0]
     }
+    
+    func saveChecklistItems() {
+        let data = NSMutableData()
+        let archiver = NSKeyedArchiver(forWritingWith: data)
+        archiver.encode(tasks, forKey: "ChecklistItems")
+        archiver.finishEncoding()
+        do {
+         try data.write(toFile: dataFilePath(), options: .atomic)
+        } catch {
+            print("couldn't write tasks")
+        }
+    }
+    
+    func loadChecklistItems() {
+        let path = dataFilePath()
+        if FileManager.default.fileExists(atPath: path) {
+            if let data = NSData(contentsOfFile: path) as? Data {
+                let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
+                if let items = unarchiver.decodeObject(forKey: "ChecklistItems") as? [CheckItem] {
+                    tasks = items
+                }
+                unarchiver.finishDecoding()
+            }
+        }
+        
+    }
+
 }
 

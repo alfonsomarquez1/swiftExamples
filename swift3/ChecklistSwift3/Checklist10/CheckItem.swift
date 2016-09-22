@@ -8,13 +8,31 @@
 
 import Foundation
 
-class CheckItem {
+class CheckItem: NSObject, NSCoding {
     var task: String
     var checked: Bool
+    
+    override init() {
+        task = ""
+        checked = false
+        super.init()
+    }
     
     init(_ task: String) {
         self.task = task
         checked = false
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        task = aDecoder.decodeObject(forKey: "Text") as? String ?? ""
+        checked = aDecoder.decodeBool(forKey: "Checked") 
+        
+        super.init()
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(task, forKey: "Text")
+        aCoder.encode(checked, forKey: "Checked")
     }
     
     func toggleCheck() {
