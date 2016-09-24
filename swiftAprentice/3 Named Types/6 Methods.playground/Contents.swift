@@ -14,7 +14,7 @@ enum Month: Int {
     }
 }
 let month = Month.October
-let monthsLeft = month.monthsUntilWinterBreak(month)
+let monthsLeft = month.monthsUntilWinterBreak(month: month)
 
 // self
 enum Month2: Int {
@@ -92,18 +92,18 @@ class Car {
     }
 }
 let car = Car(make: "Tesla", color: "Red")
-car.paint("Blue")
+car.paint(color: "Blue")
 
 // typed methods (static)
 struct MathUtils {
     static func factorial(number: Int) -> Int {
-        return (1...number).reduce(1, combine: *)
+        return (1...number).reduce(1, *)
     }
     static func triangleNumber(number: Int) -> Int {
-        return (1...number).reduce(1, combine: +)
+        return (1...number).reduce(1, +)
     }
 }
-let factorial = MathUtils.factorial(6)
+let factorial = MathUtils.factorial(number: 6)
 
 // Challenges
 import Foundation
@@ -126,9 +126,9 @@ class Circle {
 }
 let circle = Circle(radius: 1.0)
 circle.area
-circle.growByAFactor(2)
+circle.growByAFactor(factor: 2)
 circle.area
-circle.growByAFactor(5)
+circle.growByAFactor(factor: 5)
 circle.area
 
 

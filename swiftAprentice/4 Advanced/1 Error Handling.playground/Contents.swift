@@ -1,5 +1,5 @@
 // protocol ErrorType
-enum RollingError: ErrorType {
+enum RollingError: Error {
     case Doubles
     case OutOfFounding
 }
@@ -21,9 +21,9 @@ func roll(firstDice: Int, secondDice: Int) throws {
         print("You moved \(firstDice + secondDice) spaces")
     }
 }
-func move(firstDice: Int, secondDice: Int) -> String {
+func move(_ firstDice: Int, secondDice: Int) -> String {
     do {
-        try roll(firstDice, secondDice: secondDice)
+        try roll(firstDice: firstDice, secondDice: secondDice)
         return "Successful roll."
     } catch RollingError.Doubles {
         return "You rolled doubles and have lost your funding"
@@ -64,7 +64,7 @@ let wrongDirections: [Direction] = [.Left, .Left, .Left, .Forward]
 let invalidPug = PugBot(name: "Lassie", correctPath: rightDirections)
 let myPugBot = PugBot(name: "Delia", correctPath: rightDirections)
 let wrongPugBot = PugBot(name: "Delia", correctPath: wrongDirections)
-enum PugBotError: ErrorType {
+enum PugBotError: Error {
     case DidNotTurnLeft(directionMoved: Direction)
     case DidNotTurnRight(directionMoved: Direction)
     case DidNotGoForward(directionMoved: Direction)

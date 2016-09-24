@@ -73,7 +73,7 @@ if birthdate2 == nil {
 }
 
 // generic functions
-func swapped<T, U>(x: T, _ y: U) -> (U, T) {
+func swapped<T, U>(_ x: T, _ y: U) -> (U, T) {
     return (y, x)
 }
 swapped(33, "Jay")

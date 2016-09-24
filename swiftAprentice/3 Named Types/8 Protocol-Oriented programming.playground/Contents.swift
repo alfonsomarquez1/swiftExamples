@@ -1,7 +1,7 @@
 // introduction
 extension String {
     func shout()  {
-        print(self.uppercaseString)
+        print(self.uppercased)
     }
 }
 

@@ -92,7 +92,7 @@ var wheeledBike: WheeledVehicle2 = bike2
 
 // typealias
 protocol WeightCalculatable {
-    typealias WeightType
+    associatedtype WeightType
     func calculateWeight() -> WeightType
 }
 class HeavyThing: WeightCalculatable {
@@ -254,7 +254,7 @@ func printRoster(roster: [TeamMember]) {
         $0.play()
     }
 }
-printRoster(roster)
+printRoster(roster: roster)
 
 // protocols in the standard library
 // equitable & comparable
@@ -300,10 +300,10 @@ team1 <= team2
 team1 == team2
 team1 != team3
 let leagueRecords = [team1, team2, team3]
-leagueRecords.sort()
-leagueRecords.maxElement()
-leagueRecords.minElement()
-leagueRecords.startsWith([team1, team2])
+leagueRecords.sorted()
+leagueRecords.max()
+leagueRecords.min()
+leagueRecords.starts(with: [team1, team2])
 leagueRecords.contains(team2)
 
 // hashable
@@ -332,16 +332,16 @@ if isSwiftCool {
 //protocol BooleanType {
 //    var boolValue: Bool { get }
 //}
-extension Record: BooleanType {
-    var boolValue: Bool {
-        return wins > losses
-    }
-}
-if Record(wins: 10, losses: 5) {
-    print("winning!")
-} else {
-    print("losing :(")
-}
+//extension Record: BooleanType {
+//    var boolValue: Bool {
+//        return wins > losses
+//    }
+//}
+//if Record(wins: 10, losses: 5) {
+//    print("winning!")
+//} else {
+//    print("losing :(")
+//}
 
 // custonStringConvertible
 let record = Record(wins: 23, losses: 8)
@@ -369,7 +369,7 @@ struct Cage: Cleanable {
     }
 }
 protocol FlyingPet: Pet {
-    func cage(inout cage: Cage)
+    func cage( cage: inout Cage)
 }
 struct Tank: Cleanable {
     var fish: [SwimingPet] = []
@@ -378,7 +378,7 @@ struct Tank: Cleanable {
     }
 }
 protocol SwimingPet: Pet {
-    func tank(inout tank: Tank)
+    func tank( tank: inout Tank)
 }
 protocol WalkingPet: Pet {
     func excercise()
@@ -395,7 +395,7 @@ class Fish: SwimingPet {
     func feed() {
         print("Eating worms")
     }
-    func tank(inout tank: Tank) {
+    func tank( tank: inout Tank) {
         tank.fish.append(self)
     }
 }
@@ -403,7 +403,7 @@ class Mockingbird: FlyingPet {
     func feed() {
         print("Eating seeds")
     }
-    func cage(inout cage: Cage) {
+    func cage( cage: inout Cage) {
         cage.birds.append(self)
     }
 }
