@@ -12,6 +12,9 @@
 		06ACA6D51D837AB500BB5526 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06ACA6D41D837AB500BB5526 /* Assets.xcassets */; };
 		06ACA6D81D837AB500BB5526 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06ACA6D61D837AB500BB5526 /* LaunchScreen.storyboard */; };
 		06ACA6E01D837AE000BB5526 /* ChecklistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ACA6DF1D837AE000BB5526 /* ChecklistTableViewController.swift */; };
+		06C9B05C1D9498EE0041D745 /* AllListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C9B05B1D9498EE0041D745 /* AllListViewController.swift */; };
+		06C9B05E1D949CD20041D745 /* Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C9B05D1D949CD20041D745 /* Checklist.swift */; };
+		06CF9AFE1D95D8AA00EC6FC3 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CF9AFD1D95D8AA00EC6FC3 /* ListDetailViewController.swift */; };
 		06D207411D88562B00023829 /* CheckItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D207401D88562B00023829 /* CheckItem.swift */; };
 		06D207431D88AF2E00023829 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D207421D88AF2E00023829 /* ItemDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +27,9 @@
 		06ACA6D71D837AB500BB5526 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		06ACA6D91D837AB500BB5526 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06ACA6DF1D837AE000BB5526 /* ChecklistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChecklistTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		06C9B05B1D9498EE0041D745 /* AllListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListViewController.swift; sourceTree = "<group>"; };
+		06C9B05D1D949CD20041D745 /* Checklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checklist.swift; sourceTree = "<group>"; };
+		06CF9AFD1D95D8AA00EC6FC3 /* ListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
 		06D207401D88562B00023829 /* CheckItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckItem.swift; sourceTree = "<group>"; };
 		06D207421D88AF2E00023829 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ItemDetailViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
@@ -59,7 +65,10 @@
 			isa = PBXGroup;
 			children = (
 				06ACA6CD1D837AB500BB5526 /* AppDelegate.swift */,
+				06C9B05D1D949CD20041D745 /* Checklist.swift */,
 				06D207401D88562B00023829 /* CheckItem.swift */,
+				06C9B05B1D9498EE0041D745 /* AllListViewController.swift */,
+				06CF9AFD1D95D8AA00EC6FC3 /* ListDetailViewController.swift */,
 				06ACA6DF1D837AE000BB5526 /* ChecklistTableViewController.swift */,
 				06D207421D88AF2E00023829 /* ItemDetailViewController.swift */,
 				06ACA6D11D837AB500BB5526 /* Main.storyboard */,
@@ -144,7 +153,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				06D207431D88AF2E00023829 /* ItemDetailViewController.swift in Sources */,
+				06CF9AFE1D95D8AA00EC6FC3 /* ListDetailViewController.swift in Sources */,
 				06ACA6E01D837AE000BB5526 /* ChecklistTableViewController.swift in Sources */,
+				06C9B05E1D949CD20041D745 /* Checklist.swift in Sources */,
+				06C9B05C1D9498EE0041D745 /* AllListViewController.swift in Sources */,
 				06D207411D88562B00023829 /* CheckItem.swift in Sources */,
 				06ACA6CE1D837AB500BB5526 /* AppDelegate.swift in Sources */,
 			);

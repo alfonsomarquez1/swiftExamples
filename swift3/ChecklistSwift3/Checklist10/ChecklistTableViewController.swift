@@ -11,15 +11,12 @@ import UIKit
 class ChecklistTableViewController: UITableViewController {
     // MARK: -  Class Properties
     var tasks: [CheckItem]
+    var checklist: Checklist?
     
     // MARK: - UIViewController
     required init?(coder aDecoder: NSCoder) {
         tasks = [CheckItem]()
-//        tasks.append(CheckItem("Enviar mi CV a Nearsoft"))
-//        tasks.append(CheckItem("Correr media hora diaria"))
-//        tasks.append(CheckItem("Generar POC de Allianz"))
-//        tasks.append(CheckItem("Ejercitar de Autosugestion"))
-//        tasks.append(CheckItem("Generar material de Swift3"))
+        checklist = nil
         super.init(coder: aDecoder)
         loadChecklistItems()
     }
@@ -27,9 +24,8 @@ class ChecklistTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("path \( dataFilePath())")
-        print("path end")
+        title = checklist?.name ?? "Checklist"
+//        print("path \( dataFilePath())")
     }
 
     override func didReceiveMemoryWarning() {
