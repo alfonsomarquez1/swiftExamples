@@ -14,10 +14,12 @@ class AllListViewController: UITableViewController {
     required init?(coder aDecoder: NSCoder) {
         lists = [Checklist]()
         super.init(coder: aDecoder)
-        lists.append(Checklist(name: "Birthdays"))
+        loadChecklist()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("path \( dataFilePath())")
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,4 +114,43 @@ extension AllListViewController: ListDetailViewControllerDelegate {
         }
         dismiss(animated: true, completion: nil)
     }
+}
+
+//MARK: - extensions Documents folder
+extension AllListViewController {
+    func documentsDirectory() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        return paths[0]
+    }
+    func dataFilePath() -> String {
+        //      "\(documentsDirectory())/Checklist10.plist"
+        return (documentsDirectory() as NSString).strings(byAppendingPaths: ["Checklist.plist"])[0]
+    }
+    
+    func saveChecklist() {
+        let data = NSMutableData()
+        let archiver = NSKeyedArchiver(forWritingWith: data)
+        archiver.encode(lists, forKey: "Checklists")
+        archiver.finishEncoding()
+        do {
+            try data.write(toFile: dataFilePath(), options: .atomic)
+        } catch {
+            print("couldn't write tasks")
+        }
+    }
+    
+    func loadChecklist() {
+        let path = dataFilePath()
+        if FileManager.default.fileExists(atPath: path) {
+            if let data = NSData(contentsOfFile: path) as? Data {
+                let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
+                if let items = unarchiver.decodeObject(forKey: "Checklists") as? [Checklist] {
+                    lists = items
+                }
+                unarchiver.finishDecoding()
+            }
+        }
+        
+    }
+    
 }
