@@ -7,7 +7,7 @@ let alsoInferredNumbers = [Int]()
 
 // array literals
 let evenNumbers = [2,4,6,8]
-let allZeros = [Int](count: 5, repeatedValue: 0)
+let allZeros = [Int](repeating: 0, count: 5)
 let vowels = ["A", "E", "I", "O", "U"]
 
 // accesing elements
@@ -22,11 +22,11 @@ if players.count < 2 {
 var currentPlayer = players.first
 print(currentPlayer)
 print(players.last)
-currentPlayer = players.minElement()
+currentPlayer = players.min()
 print(currentPlayer)
 
 print([2, 3, 1].first)
-print([2, 3, 1].minElement())
+print([2, 3, 1].min())
 
 if let currentPlayer = currentPlayer {
     print("\(currentPlayer) will start")
@@ -50,7 +50,7 @@ func isPlayerEliminated(playerName: String) -> Bool {
     }
 }
 
-print(isPlayerEliminated("Bob"))
+print(isPlayerEliminated(playerName: "Bob"))
 players[1...3].contains("Bob")
 
 
@@ -61,15 +61,15 @@ players += ["Gina"]
 print(players)
 
 // insert
-players.insert("Frank", atIndex: 5)
+players.insert("Frank", at: 5)
 
 // removing
 var removedPlayer = players.removeLast()
 print("\(removedPlayer) was removed for cheating")
-removedPlayer = players.removeAtIndex(2)
+removedPlayer = players.remove(at: 2)
 print("\(removedPlayer) was removed for cheating")
-if let nextCheaterIndex = players.indexOf("Dan") {
-    removedPlayer = players.removeAtIndex(nextCheaterIndex)
+if let nextCheaterIndex = players.index(of: "Dan") {
+    removedPlayer = players.remove(at: nextCheaterIndex)
     print("\(removedPlayer) was removed for cheating")
 }
 
@@ -79,11 +79,11 @@ players[0...1] = ["Donna", "Craing", "Brian", "Anna"]
 print(players)
 
 // move
-let playerAnna = players.removeAtIndex(3)
-players.insert(playerAnna, atIndex: 0)
+let playerAnna = players.remove(at: 3)
+players.insert(playerAnna, at: 0)
 print(players)
 
-players = players.sort()
+players = players.sorted()
 print(players)
 // or
 //players.sortInPlace()
@@ -95,12 +95,12 @@ for playerName in players {
 }
 
 // iterate enumerate
-for (index, playerName) in players.enumerate() {
+for (index, playerName) in players.enumerated() {
     print("\(index + 1). \(playerName)")
 }
 
 // inside function
-func sumOfAllItems(intArray: [Int]) -> Int {
+func sumOfAllItems(_ intArray: [Int]) -> Int {
     var sum = 0
     for number in intArray {
         sum += number
@@ -110,7 +110,7 @@ func sumOfAllItems(intArray: [Int]) -> Int {
 print(sumOfAllItems(scores))
 
 // reduce
-let sum = scores.reduce(0, combine: +)
+let sum = scores.reduce(0, +)
 print(sum)
 
 // filter
@@ -135,37 +135,37 @@ for item in array5 { print(item) }
 
 func removeOnce(itemToRemove: Int, fromArray: [Int]) -> [Int] {
     var returnArray = fromArray
-    if let indexToRemove = fromArray.indexOf(itemToRemove) {
-       returnArray.removeAtIndex(indexToRemove)
+    if let indexToRemove = fromArray.index(of: itemToRemove) {
+       returnArray.remove(at: indexToRemove)
     }
     return returnArray
 }
 
 func remove(itemToRemove: Int, fromArray:[Int]) -> [Int] {
     var returnArray = fromArray
-    while let indexToRemove = fromArray.indexOf(itemToRemove) {
-        returnArray.removeAtIndex(indexToRemove)
+    while let indexToRemove = fromArray.index(of: itemToRemove) {
+        returnArray.remove(at: indexToRemove)
     }
     return returnArray
 }
 
-func reverse(array: [Int]) -> [Int] {
-    return array.reverse()
+func reverse(_ array: [Int]) -> [Int] {
+    return array.reversed()
 }
 print(reverse([4,2,6,8]))
 
 import Foundation
-func randomFromZeroTo(number: Int) -> Int {
+func randomFromZeroTo(_ number: Int) -> Int {
     return Int(arc4random_uniform(UInt32(number)))
 }
 
-func randomArray(array: [Int]) -> [Int] {
+func randomArray(_ array: [Int]) -> [Int] {
     var returnArray = array
     for _ in 0...array.count*10 {
         let randomIndexFrom = randomFromZeroTo(array.count)
         let randomIndexTo = randomFromZeroTo(array.count)
-        let removedItem = returnArray.removeAtIndex(randomIndexFrom)
-        returnArray.insert(removedItem, atIndex: randomIndexTo)
+        let removedItem = returnArray.remove(at: randomIndexFrom)
+        returnArray.insert(removedItem, at: randomIndexTo)
     }
     return returnArray
 }

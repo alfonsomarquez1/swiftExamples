@@ -1,23 +1,23 @@
 // simple function
 func printMyName() {
-    print("My name is Saty boy")
+    print("My name is Sat")
 }
 printMyName()
 
 // function with parameters
-func printMultipleOfFive(multiplier: Int) {
+func printMultipleOfFive(_ multiplier: Int) {
     print("\(multiplier) * 5 = \(multiplier * 5)")
 }
 printMultipleOfFive(10)
 
 // serveral parameters
-func printMultipleOf(multiplier: Int, andValue: Int) {
+func printMultipleOf(_ multiplier: Int, andValue: Int) {
     print("\(multiplier) * \(andValue) = \(multiplier * andValue)")
 }
 printMultipleOf(4, andValue: 2)
 
 // internal and external names
-func printAlsoMultipleOf(multiplier: Int, and value: Int) {
+func printAlsoMultipleOf(_ multiplier: Int, and value: Int) {
     print("\(multiplier) * \(value) = \(multiplier * value)")
 }
 printAlsoMultipleOf(4, and: 2)
@@ -29,20 +29,20 @@ func printJustMultipleOf(mult multiplier: Int, _ value: Int) {
 printJustMultipleOf(mult: 4, 2)
 
 // default values
-func printDefaultMultipleOf(multiplier: Int, and value: Int = 1) {
+func printDefaultMultipleOf(_ multiplier: Int, and value: Int = 1) {
     print("\(multiplier) * \(value) = \(multiplier * value)")
 }
 printDefaultMultipleOf(4)
 printDefaultMultipleOf(5, and: 5)
 
 // return
-func multiply(number: Int, by byValue: Int) -> Int {
+func multiply(_ number: Int, by byValue: Int) -> Int {
     return number * byValue
 }
 let result = multiply(4, by: 2)
 
 // return tuple
-func multiplyAndDivide(number: Int, by byValue: Int) -> (multiply: Int, divide: Int) {
+func multiplyAndDivide(_ number: Int, by byValue: Int) -> (multiply: Int, divide: Int) {
     return (number * byValue, number / byValue)
 }
 let result2 = multiplyAndDivide(4, by: 2)
@@ -56,12 +56,12 @@ func incrementAndPrint(value: Int) {
 }
 
 // pass by reference
-func incrementAndPrintInOut(inout value: Int) {
+func incrementAndPrintInOut( value: inout Int) {
     value += 1
     print(value)
 }
 var value = 5
-incrementAndPrintInOut(&value)
+incrementAndPrintInOut(value: &value)
 //incrementAndPrintInOut(value)
 print(value)
 
@@ -84,7 +84,7 @@ functionVariable = subtract
 let resul4 = functionVariable(4, 2)
 
 // functions as parameters
-func printResult(functionVariable: (Int, Int) -> Int, _ a: Int, _ b: Int) {
+func printResult(_ functionVariable: (Int, Int) -> Int, _ a: Int, _ b: Int) {
     let result = functionVariable(a, b)
     print(result)
 }

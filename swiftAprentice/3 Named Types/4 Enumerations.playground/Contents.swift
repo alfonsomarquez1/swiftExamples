@@ -20,7 +20,7 @@ func schoolSemester(month: Month) -> String {
 var month: Month = .July
 month = Month.April
 month = .September
-schoolSemester(month)
+schoolSemester(month: month)
 
 // raw values
 enum Month2: Int {
@@ -37,9 +37,9 @@ enum Month4: Int {
 func  monthsUntilWinterBreak(month: Month4) -> Int {
     return Month4.December.rawValue - month.rawValue
 }
-monthsUntilWinterBreak(.April)
+monthsUntilWinterBreak(month: .April)
 if let fifthMonth = Month4(rawValue: 5) {
-    monthsUntilWinterBreak(fifthMonth)
+    monthsUntilWinterBreak(month: fifthMonth)
 }
 enum Coin: Int {
     case Penny = 1, Nickel = 5, Dime = 10, Quarter = 25
@@ -62,7 +62,7 @@ func withdraw(amount: Int) -> WithdrawalResult {
       return .Error("Not enough money!")
     }
 }
-let result = withdraw(99)
+let result = withdraw(amount: 99)
 switch result {
 case let .Success(newBalance):
     print("Your new balance is: \(newBalance)")
@@ -87,17 +87,17 @@ enum HouseSwitch {
 var age: Int?
 age = 17
 age = nil
-let email: Optional<String> = .None
-let website: Optional<String> = .Some("raywenderlich.com")
+let email: Optional<String> = .none
+let website: Optional<String> = .some("raywenderlich.com")
 switch website {
-case .None:
+case .none:
     print("No value")
-case let .Some(value):
+case let .some(value):
     print("Got a value: \(value)")
 }
-let optionalNil: Optional<Int> = .None
+let optionalNil: Optional<Int> = .none
 optionalNil == nil
-optionalNil == .None
+optionalNil == .none
 
 // challenges
 func countThatMoney(coins: [Coin]) -> Int {
@@ -107,5 +107,5 @@ func countThatMoney(coins: [Coin]) -> Int {
     }
     return money
 }
-print(countThatMoney(coinPurse))
+print(countThatMoney(coins: coinPurse))
 

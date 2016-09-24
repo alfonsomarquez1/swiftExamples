@@ -1,5 +1,5 @@
 // Optional sceneario
-var name: String = "Saty boy"
+var name: String = "Sat"
 var age: Int = 30
 var occupation: String? = "code ninja"
 
@@ -18,7 +18,7 @@ print(ageInteger)
 //let nope = ageInteger + 1
 
 // force unwrapping
-var authorName: String? = "Saty boy"
+var authorName: String? = "Sat"
 var unwrappedAuthorName = authorName!
 print("Author is \(unwrappedAuthorName)")
 
@@ -43,10 +43,10 @@ if let unwrappedAuthorName: String = authorName {
 }
 
 // if let binding multiple values
-let authorNameO: String? = "Saty"
+let authorNameO: String? = "Sat"
 let authorAgeO: Int? = 30
 
-if let name = authorNameO, age = authorAgeO {
+if let name = authorNameO, let age = authorAgeO {
     print("The author is \(name) who is \(age) years old.")
 } else {
     print("No author or no age")

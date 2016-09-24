@@ -25,7 +25,7 @@ multiplyClosure = {
 }
 
 // more examples
-func operateOnNumbers(a: Int, _ b: Int, operation: (Int, Int) -> Int) -> Int {
+func operateOnNumbers(_ a: Int, _ b: Int, operation: (Int, Int) -> Int) -> Int {
     let result = operation(a,b)
     print(result)
     return result
@@ -37,7 +37,7 @@ let addClosure = { (a:Int, b: Int) in
 
 operateOnNumbers(4, 2, operation: addClosure)
 
-func addFunction(a: Int, b: Int) -> Int {
+func addFunction(_ a: Int, b: Int) -> Int {
     return a + b
 }
 

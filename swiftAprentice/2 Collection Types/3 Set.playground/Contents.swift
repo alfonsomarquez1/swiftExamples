@@ -26,7 +26,7 @@ let removedElement = myTimes.remove("8am")
 print(myTimes)
 
 // cool fact
-func distinct(array: [Int]) -> [Int] {
+func distinct(_ array: [Int]) -> [Int] {
     return [Int](Set<Int>(array))
 }
 print(distinct([1,1,1,1,2,3,1,4,3,2,2,3,3]))
@@ -41,15 +41,14 @@ let adamTimes: Set = ["9am", "11am", "1pm"]
 let unionSet = myTimes.union(adamTimes)
 
 // intersect
-let intersectSet = myTimes.intersect(adamTimes)
+let intersectSet = myTimes.intersection(adamTimes)
 print(intersectSet)
 
 // subtract
-let subtractSet = myTimes.subtract(adamTimes)
-print(subtractSet)
+myTimes.subtract(adamTimes)
 
 // exclusiveOr
-let exclusiveOrSet = myTimes.exclusiveOr(adamTimes)
+let exclusiveOrSet = myTimes.symmetricDifference(adamTimes)
 print(exclusiveOrSet)
 
 // challenge
@@ -58,11 +57,11 @@ let day2: Set = ["Anna", "Benny", "Danny"]
 let day3: Set = ["Anna", "Danny", "Eric"]
 
 func allAttendances(day1: Set<String>, day2: Set<String>, day3: Set<String>) -> Set<String> {
-    return day1.intersect(day2).intersect(day3)
+    return day1.intersection(day2).intersection(day3)
 }
-print("All Attendances \(allAttendances(day1, day2: day2, day3: day3))")
+print("All Attendances \(allAttendances(day1: day1, day2: day2, day3: day3))")
 
-func dropoutAfterFirstDay(day1: Set<String>,_ day2: Set<String>,_ day3: Set<String>) -> Set<String> {
-    return day1.exclusiveOr(day2).intersect(day1)
+func dropoutAfterFirstDay(_ day1: Set<String>,_ day2: Set<String>,_ day3: Set<String>) -> Set<String> {
+    return day1.symmetricDifference(day2).intersection(day1)
 }
 print("Dropouts \(dropoutAfterFirstDay(day1, day2, day3))")

@@ -32,7 +32,7 @@ homeOwner = imposter
 print(johnRef === homeOwner)
 print(imposter === homeOwner)
 
-func memberOf(person: Person, group: [Person]) -> Bool {
+func memberOf(_ person: Person, group: [Person]) -> Bool {
     var isMember = false
     for member in group {
         if member === person {
@@ -60,7 +60,7 @@ class Student {
         self.lastName = lastName
         grades = []
     }
-    func recordGrade(grade: Grade) {
+    func record(grade: Grade) {
         grades.append(grade)
     }
     func gradePointAverage() -> Double {
@@ -77,8 +77,8 @@ class Student {
 let jane = Student(firstName: "Jane", lastName: "Appleseed")
 let history = Grade(letter: "B", points: 9.0, credits: 3.0)
 var math = Grade(letter: "A", points: 16.0, credits: 4.0)
-jane.recordGrade(history)
-jane.recordGrade(math)
+jane.record(grade: history)
+jane.record(grade: math)
 
 // access control: public, internal, private
 public var publicString: String = "Everyone can see me!"
@@ -94,7 +94,7 @@ internal class InternalClass {
 
 print(publicString)
 let myClass = InternalClass() // Build error, if you'r outside InternalClass module
-myClass.sayHi() // Build error, if you'r outside InternalClass file
+//myClass.sayHi()  Build error, if you'r outside InternalClass file
 myClass.speak() // "Hi!"
 
 class Student2 {
@@ -109,7 +109,7 @@ class Student2 {
         credits = 0.0
     }
     func recordGrade(grade: Grade) {
-        if grades.contains({ $0.letter == "F"}) {
+        if grades.contains(where: { $0.letter == "F"}) {
             // Second F! Double-secret probation!
         }
         grades.append(grade)
@@ -119,16 +119,16 @@ class Student2 {
 
 let jane2 = Student2(firstName: "Jane", lastName: "Appleseed")
 let history2 = Grade(letter: "B", points: 9.0, credits: 3.0)
-jane2.recordGrade(history2)
-jane2.grades.append(history2) // Build Error! I written outside this file
+jane2.recordGrade(grade: history2)
+//jane2.grades.append(history2) Build Error! I written outside this file
 var math2 = Grade(letter: "F", points: 16.0, credits: 2.0)
-jane2.recordGrade(math2) // Double secret probation
-jane2.grades.append(math2) // Sneaky!, Build Error! I written outside this file
+jane2.recordGrade(grade: math2) // Double secret probation
+//jane2.grades.append(math2)  Sneaky!, Build Error! I written outside this file
 print(jane2.credits)
 
 // The teacher made a mistake; the class has 4 credits
 math2.credits = 4.0
-jane2.recordGrade(math2)
+jane2.recordGrade(grade: math2)
 print(jane2.credits)
 
 // challenge
@@ -139,10 +139,10 @@ class User {
         self.name = name
         lists = [:]
     }
-    func addList(list: List) {
+    func add(list: List) {
         lists[list.name] = list
     }
-    func listForName(name: String) -> List? {
+    func list(name: String) -> List? {
         return lists[name]
     }
 }
@@ -162,12 +162,12 @@ class List {
 var list = List(name: "action")
 var jane3 = User(name: "Jane")
 var john3 = User(name: "Jhon")
-jane3.addList(list)
-john3.addList(list)
+jane3.add(list: list)
+john3.add(list: list)
 list.movieTitles.insert("Avengers")
-print(jane3.listForName("action")?.movieTitles)
-jane3.listForName("action")?.movieTitles.insert("Avengers")
-john3.listForName("action")?.movieTitles.insert("Batman")
-jane3.listForName("action")?.printList()
-john3.listForName("action")?.printList()
-print(jane3.listForName("action")?.movieTitles)
+print(jane3.list(name: "action")?.movieTitles)
+jane3.list(name: "action")?.movieTitles.insert("Avengers")
+john3.list(name: "action")?.movieTitles.insert("Batman")
+jane3.list(name: "action")?.printList()
+john3.list(name: "action")?.printList()
+print(jane3.list(name: "action")?.movieTitles)

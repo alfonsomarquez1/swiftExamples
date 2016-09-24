@@ -55,7 +55,7 @@ struct Location2 {
     
     // String in GPS format "44.9871,-93.2758"
     init(coordinateString: String) {
-        let coordinateSplit = coordinateString.characters.split(",")
+        let coordinateSplit = coordinateString.components(separatedBy: ",")
         latitude = atof(String(coordinateSplit.first!))
         longitude = atof(String(coordinateSplit.last!))
     }
@@ -130,7 +130,7 @@ let pizzaJoints = [
 ]
 
 // methods
-func isInRange3(customer: Location) -> Bool {
+func isInRange3(_ customer: Location) -> Bool {
     for pizzaRange in pizzaJoints {
         let difference = sqrt(pow(pizzaRange.center.latitude - customer.latitude, 2) + pow((pizzaRange.center.longitude - customer.longitude), 2))
         if difference < pizzaRange.range {
@@ -146,7 +146,7 @@ struct DeliveryRange2 {
     var range: Double
     let center: Location2
     
-    func isInRange(customer: Location2) -> Bool {
+    func isInRange(_ customer: Location2) -> Bool {
         let difference = sqrt(pow(latitude - center.latitude, 2) + pow(longitude - center.longitude, 2))
         return difference < range
     }

@@ -25,7 +25,7 @@ if hourOfDay < 6 {
 } else if hourOfDay < 24 {
     timeOfDay = "Late evening"
 } else {
-    timeOfDay = "Invalid hour!".uppercaseString
+    timeOfDay = "Invalid hour!".uppercased()
 }
 print(timeOfDay)
 
@@ -82,7 +82,7 @@ case 17, 18, 19:
 case 20, 21, 22, 23:
     timeOfDay2 = "Late evening"
 default:
-    timeOfDay2 = "Invalid hour!".uppercaseString
+    timeOfDay2 = "Invalid hour!".uppercased()
 }
 // switch let-where
 let number2 = 10

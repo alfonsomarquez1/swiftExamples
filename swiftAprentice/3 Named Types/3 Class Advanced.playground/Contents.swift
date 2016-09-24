@@ -40,7 +40,7 @@ class StudentAthlete: Student {
 //        objetct is still in initialization first phase
 //        recordGrade(passGrade)
         super.init(firstName: firstName, lastName: lastName)
-        recordGrade(passGrade)
+        recordGrade(grade: passGrade)
     }
     init(transfer: Student, sports: [String]) {
         self.sports = sports
@@ -53,7 +53,7 @@ class StudentAthlete: Student {
         super.init(firstName: firstName, lastName: lastName)
     }
     override func recordGrade(grade: Grade) {
-        super.recordGrade(grade)
+        super.recordGrade(grade: grade)
         if grade.letter == "F" {
             self.failedClasses.append(grade)
         }
@@ -75,8 +75,8 @@ func phonebookName(person: Person) -> String {
 }
 let person = Person(firstName: "Johnny", lastName: "Appleseed")
 let star = StarStudentAthlete(firstName: "Jane", lastName: "Appleseed",sports: ["Chess"])
-phonebookName(person)
-phonebookName(star)
+phonebookName(person: person)
+phonebookName(person: star)
 
 class Team {
     var players: [StudentAthlete]
@@ -115,8 +115,8 @@ func pressButton(button: Button) {
 }
 let imageButton = ImageButton()
 let textButton = TextButton()
-pressButton(imageButton)
-pressButton(textButton)
+pressButton(button: imageButton)
+pressButton(button: textButton)
 
 // class lyfecycle
 // ARC - Automatic Reference Counting - Reference Counting - Retain count

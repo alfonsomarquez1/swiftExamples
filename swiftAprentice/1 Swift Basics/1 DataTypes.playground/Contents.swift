@@ -41,7 +41,7 @@ let subtract = 10 - 2
 let multiply = 2 * 4
 let divide = 24 / 3
 let modulo = 28 % 10
-let moduloDecimal = 11.6 % 1.2
+let moduloDecimal = 11.6.remainder(dividingBy: 1.2)
 let shiftLeft = 1 << 3
 let shiftRight = 32 >> 2
 
@@ -130,8 +130,8 @@ graphemeCluster3.characters.count
 // upper and lower case
 let string = "Swift is Legend...."
 let string2 = "wait for it...."
-let string3 = "....dary!".uppercaseString
+let string3 = "....dary!".uppercased()
 string
-let string2Mayusculas = string2.uppercaseString
-string3.lowercaseString
+let string2Mayusculas = string2.uppercased()
+string3.lowercased()
 string2

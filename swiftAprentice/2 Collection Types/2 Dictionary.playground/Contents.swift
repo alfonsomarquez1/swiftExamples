@@ -34,7 +34,7 @@ bobData.updateValue("Bobby", forKey: "name")
 bobData["profession"] = "Mailman"
 
 // remove
-bobData.removeValueForKey("state")
+bobData.removeValue(forKey: "state")
 bobData["city"] = nil
 
 // iterating
@@ -52,9 +52,9 @@ for value in namesAndScores.values {
 }
 
 //reduce
-var names =  namesAndScores.reduce("", combine: {$0 + "\($1.0), "})
+var names =  namesAndScores.reduce("", {$0 + "\($1.0), "})
 names = namesAndScores.reduce("") { $0 + "\($1.0), "}
-names = namesAndScores.reduce("", combine: { (accumulator, dictionary) -> String in
+names = namesAndScores.reduce("", { (accumulator, dictionary) -> String in
     accumulator + "\(dictionary.0), "
 })
 names = namesAndScores.reduce("") {(accumulator, dictionary: (key: String,value: Int)) -> String in
@@ -82,7 +82,7 @@ print("some string".hashValue)
 print(1.hashValue)
 print(false.hashValue)
 
-func swapValueForKey(key1: String, withValueForKey key2: String, inDictionary: [String : String]) -> [String: String] {
+func swapValueForKey(_ key1: String, withValueForKey key2: String, inDictionary: [String : String]) -> [String: String] {
     var swappedDictionary = inDictionary
     let newValue = inDictionary[key1]
     let swappedValue = inDictionary[key2]
@@ -90,9 +90,9 @@ func swapValueForKey(key1: String, withValueForKey key2: String, inDictionary: [
     swappedDictionary[key1] = swappedValue
     return swappedDictionary
 }
-print(swapValueForKey("Saty", withValueForKey: "Dashi", inDictionary: ["Saty": "Boy","Dashi": "Barashi"]))
+print(swapValueForKey("Sat", withValueForKey: "Dashi", inDictionary: ["Sat": "Boy","Dashi": "Barashi"]))
 
-func combine(dict1: [String: String], with dict2:[String: String]) -> [String: String] {
+func combine(_ dict1: [String: String], with dict2:[String: String]) -> [String: String] {
     var returnDictionary = dict1
     dict2.map({ dictionary -> Void in returnDictionary[dictionary.0] = dictionary.1})
     return returnDictionary

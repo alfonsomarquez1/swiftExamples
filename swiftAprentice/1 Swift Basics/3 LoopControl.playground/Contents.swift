@@ -20,7 +20,7 @@ case 17...19:
 case 20..<24:
     timeOfDay = "Late evening"
 default:
-    timeOfDay = "Invalid hour!".uppercaseString
+    timeOfDay = "Invalid hour!".uppercased()
 }
 
 // for loop
