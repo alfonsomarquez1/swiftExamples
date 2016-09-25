@@ -10,10 +10,21 @@ import Foundation
 
 class DataModel {
     var lists: [Checklist]?
+    var indexOfSelectedChecklist: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: "ChecklistIndex")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "ChecklistIndex")
+//            UserDefaults.standard.synchronize()
+        }
+    }
     
     init() {
         print("path \( dataFilePath())")
         loadChecklist()
+        registerDefaults()
+        handleFirstTime()
     }
     func documentsDirectory() -> String {
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
@@ -47,5 +58,21 @@ class DataModel {
                 unarchiver.finishDecoding()
         }
         lists = loadedList ?? [Checklist]()
+    }
+    
+    func registerDefaults() {
+        let dictionary: [String: Any] = ["ChecklistIndex": -1, "FirstTime": true]
+        UserDefaults.standard.register(defaults: dictionary)
+    }
+    
+    func handleFirstTime() {
+        if UserDefaults.standard.bool(forKey: "FirstTime") {
+            let checklist = Checklist(name: "List")
+            lists?.append(checklist)
+            indexOfSelectedChecklist = 0
+            UserDefaults.standard.set(false, forKey: "FirstTime")
+            UserDefaults.standard.synchronize()
+        }
+        
     }
 }
