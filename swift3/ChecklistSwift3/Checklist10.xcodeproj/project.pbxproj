@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06A1E3091D9746FA008861BF /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A1E3081D9746FA008861BF /* DataModel.swift */; };
 		06ACA6CE1D837AB500BB5526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ACA6CD1D837AB500BB5526 /* AppDelegate.swift */; };
 		06ACA6D31D837AB500BB5526 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06ACA6D11D837AB500BB5526 /* Main.storyboard */; };
 		06ACA6D51D837AB500BB5526 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06ACA6D41D837AB500BB5526 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06A1E3081D9746FA008861BF /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		06ACA6CA1D837AB500BB5526 /* Checklist10.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checklist10.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06ACA6CD1D837AB500BB5526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06ACA6D21D837AB500BB5526 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				06ACA6D41D837AB500BB5526 /* Assets.xcassets */,
 				06ACA6D61D837AB500BB5526 /* LaunchScreen.storyboard */,
 				06ACA6D91D837AB500BB5526 /* Info.plist */,
+				06A1E3081D9746FA008861BF /* DataModel.swift */,
 			);
 			path = Checklist10;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				06ACA6E01D837AE000BB5526 /* ChecklistTableViewController.swift in Sources */,
 				06C9B05E1D949CD20041D745 /* Checklist.swift in Sources */,
 				06C9B05C1D9498EE0041D745 /* AllListViewController.swift in Sources */,
+				06A1E3091D9746FA008861BF /* DataModel.swift in Sources */,
 				06D207411D88562B00023829 /* CheckItem.swift in Sources */,
 				06ACA6CE1D837AB500BB5526 /* AppDelegate.swift in Sources */,
 			);

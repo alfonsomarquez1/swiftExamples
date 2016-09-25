@@ -9,16 +9,10 @@
 import UIKit
 
 class AllListViewController: UITableViewController {
-    var lists: [Checklist]
+    var dataModel: DataModel?
     
-    required init?(coder aDecoder: NSCoder) {
-        lists = [Checklist]()
-        super.init(coder: aDecoder)
-        loadChecklist()
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("path \( dataFilePath())")
 
     }
 
@@ -29,21 +23,21 @@ class AllListViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lists.count
+        return dataModel?.lists?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        lists.remove(at: indexPath.row)
+        dataModel?.lists?.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = cellForTableView(tableView: tableView)
         
-        let checklist = lists[indexPath.row]
-        cell.textLabel?.text = checklist.name
-        cell.accessoryType = .detailDisclosureButton
-        
+        if let checklist = dataModel?.lists?[indexPath.row] {
+            cell.textLabel?.text = checklist.name
+            cell.accessoryType = .detailDisclosureButton
+        }
         return cell
     }
     
@@ -58,7 +52,7 @@ class AllListViewController: UITableViewController {
     
     // MARK: - Table View Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let checklist = lists[indexPath.row]
+        let checklist = dataModel?.lists?[indexPath.row]
         
         performSegue(withIdentifier: "ShowChecklist", sender: checklist)
     }
@@ -68,7 +62,7 @@ class AllListViewController: UITableViewController {
         
         controller.delegate = self
         
-        let checklist = lists[indexPath.row]
+        let checklist = dataModel?.lists?[indexPath.row]
         controller.checklistToEdit = checklist
         
         
@@ -98,14 +92,14 @@ extension AllListViewController: ListDetailViewControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
     func listDetail(viewController controller: ListDetailViewController, didFinishAddingCheckList checklist: Checklist) {
-        let newRowIndex = lists.count
-        lists.append(checklist)
+        guard let newRowIndex = dataModel?.lists?.count else { return } 
+        dataModel?.lists?.append(checklist)
         tableView.insertRows(at:[IndexPath(row: newRowIndex, section: 0)] , with: .automatic)
         dismiss(animated: true, completion: nil)
     }
     
     func listDetail(viewController controller: ListDetailViewController, didFinishEditingChecklist checklist: Checklist) {
-        guard let index = lists.index(of: checklist) else {
+        guard let index = dataModel?.lists?.index(of: checklist) else {
             return
         }
         let indexPath = IndexPath(row: index, section: 0)
@@ -116,41 +110,3 @@ extension AllListViewController: ListDetailViewControllerDelegate {
     }
 }
 
-//MARK: - extensions Documents folder
-extension AllListViewController {
-    func documentsDirectory() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        return paths[0]
-    }
-    func dataFilePath() -> String {
-        //      "\(documentsDirectory())/Checklist10.plist"
-        return (documentsDirectory() as NSString).strings(byAppendingPaths: ["Checklist.plist"])[0]
-    }
-    
-    func saveChecklist() {
-        let data = NSMutableData()
-        let archiver = NSKeyedArchiver(forWritingWith: data)
-        archiver.encode(lists, forKey: "Checklists")
-        archiver.finishEncoding()
-        do {
-            try data.write(toFile: dataFilePath(), options: .atomic)
-        } catch {
-            print("couldn't write tasks")
-        }
-    }
-    
-    func loadChecklist() {
-        let path = dataFilePath()
-        if FileManager.default.fileExists(atPath: path) {
-            if let data = NSData(contentsOfFile: path) as? Data {
-                let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
-                if let items = unarchiver.decodeObject(forKey: "Checklists") as? [Checklist] {
-                    lists = items
-                }
-                unarchiver.finishDecoding()
-            }
-        }
-        
-    }
-    
-}
