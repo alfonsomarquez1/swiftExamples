@@ -12,10 +12,10 @@ class DataModel {
     var lists: [Checklist]?
     var indexOfSelectedChecklist: Int {
         get {
-            return UserDefaults.standard.integer(forKey: "ChecklistIndex")
+            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.checklistIndex.rawValue)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "ChecklistIndex")
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.checklistIndex.rawValue)
 //            UserDefaults.standard.synchronize()
         }
     }
@@ -26,19 +26,20 @@ class DataModel {
         registerDefaults()
         handleFirstTime()
     }
+    
     func documentsDirectory() -> String {
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         return paths[0]
     }
     func dataFilePath() -> String {
         //      "\(documentsDirectory())/Checklist10.plist"
-        return (documentsDirectory() as NSString).strings(byAppendingPaths: ["Checklist.plist"])[0]
+        return (documentsDirectory() as NSString).strings(byAppendingPaths: ["\(PersistenceKeys.file.rawValue)\(PersistenceKeys.ext.rawValue)"])[0]
     }
     
     func saveChecklist() {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWith: data)
-        archiver.encode(lists, forKey: "Checklists")
+        archiver.encode(lists, forKey: PersistenceKeys.root.rawValue)
         archiver.finishEncoding()
         do {
             try data.write(toFile: dataFilePath(), options: .atomic)
@@ -52,27 +53,31 @@ class DataModel {
         let path = dataFilePath()
         if FileManager.default.fileExists(atPath: path), let data = NSData(contentsOfFile: path) as? Data {
                 let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
-                if let items = unarchiver.decodeObject(forKey: "Checklists") as? [Checklist] {
+                if let items = unarchiver.decodeObject(forKey: PersistenceKeys.root.rawValue) as? [Checklist] {
                     loadedList = items
                 }
                 unarchiver.finishDecoding()
         }
         lists = loadedList ?? [Checklist]()
+        sortChecklist()
     }
     
     func registerDefaults() {
-        let dictionary: [String: Any] = ["ChecklistIndex": -1, "FirstTime": true]
+        let dictionary: [String: Any] = [UserDefaultsKeys.checklistIndex.rawValue: -1, UserDefaultsKeys.firstTime.rawValue: true]
         UserDefaults.standard.register(defaults: dictionary)
     }
     
     func handleFirstTime() {
-        if UserDefaults.standard.bool(forKey: "FirstTime") {
-            let checklist = Checklist(name: "List")
+        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.firstTime.rawValue) {
+            let checklist = Checklist(name: PersistenceKeys.defaultName.rawValue)
             lists?.append(checklist)
             indexOfSelectedChecklist = 0
-            UserDefaults.standard.set(false, forKey: "FirstTime")
+            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.firstTime.rawValue)
             UserDefaults.standard.synchronize()
         }
-        
+    }
+    
+    func sortChecklist() {
+        lists?.sort() { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
     }
 }

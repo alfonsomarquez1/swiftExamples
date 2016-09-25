@@ -59,6 +59,7 @@ class ChecklistTableViewController: UITableViewController {
     func updateCheck(withCell cell: UITableViewCell, andCheckItem item: CheckItem) {
         guard let check = cell.viewWithTag(1001) as? UILabel else { return }
         check.text = item.checked ? "√" : " "
+        check.textColor = view.tintColor
     }
     
     // MARK: - Table view data source
